@@ -1,5 +1,7 @@
 <?php namespace Motty\Laravel\Validator\Laravel;
 
+use Motty\Laravel\Validator\BaseValidator;
+
 use Illuminate\Contracts\Validation\Factory;
 
 abstract class Validator extends BaseValidator
