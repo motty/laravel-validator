@@ -1,11 +1,13 @@
 <?php namespace Motty\Laravel\Validator;
 
+use Illuminate\Contracts\Validation\Factory;
+
 abstract class BaseValidator
 {
     /**
-     * The validator instance
+     * Validator factory object
      *
-     * @var object
+     * @var Factory
      */
     protected $validator;
 
@@ -31,6 +33,23 @@ abstract class BaseValidator
     protected $errors = [];
 
     /**
+     * Validation messages
+     *
+     * @var array
+     */
+    public $messages = [];
+
+    /**
+     * Construct
+     *
+     * @param Factory $validator
+     */
+    public function __construct(Factory $validator)
+    {
+        $this->validator = $validator;
+    }
+
+    /**
      * Set data to validate
      *
      * @param  array  $data
@@ -48,10 +67,20 @@ abstract class BaseValidator
      *
      * @return boolean
      */
-    abstract public function validate();
+    public function validate()
+    {
+        $validator = $this->validator->make($this->data, $this->rules, $this->messages);
+
+        if ($validator->fails()) {
+            $this->errors = $validator->messages();
+            return false;
+        }
+
+        return true;
+    }
 
     /**
-     * Return errors
+     * Return the errors message bag
      *
      * @return \Illuminate\Support\MessageBag
      */
