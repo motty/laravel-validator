@@ -32,7 +32,7 @@ class ValidateException extends Exception
      *
      * @return \Illuminate\Support\MessageBag
      */
-    public function erros()
+    public function errors()
     {
         return $this->errors;
     }

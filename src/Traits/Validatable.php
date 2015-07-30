@@ -3,6 +3,8 @@
 use Motty\Laravel\Validator\Contracts\Validator;
 use Motty\Laravel\Validator\Exceptions\ValidateException;
 
+use Exception;
+
 trait Validatable
 {
     /**
